@@ -41,6 +41,14 @@ namespace NuclearReactionModeling
             return particlesCounts;
         }
 
+        public static List<Particle> GenerateParticles(int count, double particlesDurationToCenter)
+        {
+            return Enumerable
+                .Range(0, count)
+                .Select(_ => new Particle(Vector3D.GetRandom(particlesDurationToCenter), Vector3D.GetRandom()))
+                .ToList();
+        }
+
         private void MoveParticles()
         {
             foreach (var particle in particles)
