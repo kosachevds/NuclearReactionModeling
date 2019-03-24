@@ -5,16 +5,19 @@ using Interactions = NuclearReactionModeling.InteractionGenerator.Interaction;
 
 namespace NuclearReactionModeling
 {
-    class ModelingSystem
+    class NuclearReaction
     {
-        private int maxStepCount;
-        private int fissionParticlesCount;
-        private double lambda;
         private IShape body;
         private List<Particle> particles;
+        private double lambda;
+
+        private int maxStepCount;
+        private int fissionParticlesCount;
         private InteractionGenerator interactions;
 
         private static readonly System.Random rnd = new System.Random();
+
+
 
         private void MoveParticles()
         {
