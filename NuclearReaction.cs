@@ -17,7 +17,12 @@ namespace NuclearReactionModeling
 
         private static readonly System.Random rnd = new System.Random();
 
-
+        public NuclearReaction(IShape body, List<Particle> particles, double lambda)
+        {
+            this.body = body;
+            this.particles = particles;
+            this.lambda = lambda;
+        }
 
         private void MoveParticles()
         {
