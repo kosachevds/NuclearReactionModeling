@@ -28,6 +28,19 @@ namespace NuclearReactionModeling
             this.RandomInteractions = new InteractionGenerator();
         }
 
+        public List<int> Run()
+        {
+            var particlesCounts = new List<int>(this.MaxStepCount);
+            while (particlesCounts.Count < this.MaxStepCount && this.particles.Any())
+            {
+                particlesCounts.Add(this.particles.Count);
+                this.MoveParticles();
+                this.RemoveExternalParticles();
+                this.Interact();
+            }
+            return particlesCounts;
+        }
+
         private void MoveParticles()
         {
             foreach (var particle in particles)
