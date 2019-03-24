@@ -28,6 +28,11 @@ namespace NuclearReactionModeling
             this.RandomInteractions = new InteractionGenerator();
         }
 
+        public NuclearReaction(IShape body, double lambda, int beginParticleCount, double particlesDurationToCenter)
+            : this(body, GenerateParticles(beginParticleCount, particlesDurationToCenter), lambda)
+        {
+        }
+
         public List<int> Run()
         {
             var particlesCounts = new List<int>(this.MaxStepCount);
