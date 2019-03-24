@@ -1,6 +1,6 @@
 namespace NuclearReactionModeling
 {
-    abstract class Vector3D
+    class Vector3D
     {
         public Vector3D(double x, double y, double z)
         {
@@ -15,11 +15,24 @@ namespace NuclearReactionModeling
 
         public double Z { get; }
 
-        protected double Length => System.Math.Sqrt(X * X + Y * Y + Z * Z);
+        public double Length => System.Math.Sqrt(X * X + Y * Y + Z * Z);
 
-        // public Vector3D Multiply(double scalar)
-        // {
-        //     return Vector3D(X, Y, Z);
-        // }
+        public Vector3D Multiply(double scalar)
+        {
+            return new Vector3D(
+                this.X * scalar,
+                this.Y * scalar,
+                this.Z * scalar
+            );
+        }
+
+        public Vector3D Add(Vector3D another)
+        {
+            return new Vector3D(
+                this.X + another.X,
+                this.Y + another.Y,
+                this.Z + another.Z
+            );
+        }
     }
 }
