@@ -1,7 +1,11 @@
+using System.Linq;
+
 namespace NuclearReactionModeling
 {
     class Vector3D
     {
+        private static readonly System.Random rnd = new System.Random();
+
         public Vector3D(double x, double y, double z)
         {
             this.X = x;
@@ -33,6 +37,14 @@ namespace NuclearReactionModeling
                 this.Y + another.Y,
                 this.Z + another.Z
             );
+        }
+
+        public static Vector3D GetRandom(double radius = 1.0)
+        {
+            var components = Enumerable.Range(0, 3)
+                .Select(_ => rnd.NextDouble() * (2 * radius) - radius)
+                .ToArray();
+            return new Velocity(components[0], components[1], components[2]);
         }
     }
 }
