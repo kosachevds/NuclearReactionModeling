@@ -11,13 +11,5 @@ namespace NuclearReactionModeling
 
         public double DurationToZero => this.Length;
 
-        public Point Move(double length, Velocity velocity)
-        {
-            return new Point(
-                this.X + length * velocity.X,
-                this.Y + length * velocity.Y,
-                this.Z + length * velocity.Z
-            );
-        }
     }
 }
