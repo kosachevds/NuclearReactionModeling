@@ -58,11 +58,6 @@ namespace NuclearReactionModeling
             this.particles = nextParticles;
         }
 
-        private Particle ScatterParticle(Particle particle)
-        {
-            return new Particle(particle.Coordinates, Velocity.Generate());
-        }
-
         private IEnumerable<Particle> SplitNucleus(Particle particle)
         {
             return Enumerable.Range(0, this.fissionParticlesCount)
