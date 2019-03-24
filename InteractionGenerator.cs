@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NuclearReactionModeling
 {
@@ -14,6 +16,13 @@ namespace NuclearReactionModeling
         public virtual Interaction Next()
         {
             return (Interaction) rnd.Next(2);
+        }
+
+        public List<Interaction> GenerateSequence(int size)
+        {
+            return Enumerable.Range(0, size)
+                .Select(_ => this.Next())
+                .ToList();
         }
     }
 }
