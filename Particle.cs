@@ -2,6 +2,12 @@ namespace NuclearReactionModeling
 {
     class Particle
     {
+        public Particle(Point coordinates, Velocity velocity)
+        {
+            Coordinates = coordinates;
+            Velocity = velocity;
+        }
+
         public Point Coordinates { get; set; }
 
         public Velocity Velocity { get; set; }
