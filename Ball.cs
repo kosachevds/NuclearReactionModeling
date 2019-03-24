@@ -9,15 +9,9 @@ namespace NuclearReactionModeling
             this.Radius = radius;
         }
 
-        public bool IsInternalPoint(double x, double y, double z)
+        public bool IsInternalPoint(Vector3D point)
         {
-            var durationToCenter = System.Math.Sqrt(x * x + y * y + z * z);
-            return durationToCenter <= this.Radius;
-        }
-
-        public bool IsInternalPoint(Point point)
-        {
-            return point.DurationToZero <= this.Radius;
+            return point.Length <= this.Radius;
         }
     }
 }
