@@ -26,5 +26,10 @@ namespace NuclearReactionModeling
                 this.Z + length * this.Velocity.Z
             );
         }
+
+        public Particle CopyWithNewVelocity()
+        {
+            return new Particle(this.Coordinates, Velocity.Generate())
+        }
     }
 }
