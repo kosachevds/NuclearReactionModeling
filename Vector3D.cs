@@ -44,7 +44,7 @@ namespace NuclearReactionModeling
             var components = Enumerable.Range(0, 3)
                 .Select(_ => rnd.NextDouble() * (2 * radius) - radius)
                 .ToArray();
-            return new Velocity(components[0], components[1], components[2]);
+            return new Vector3D(components[0], components[1], components[2]);
         }
     }
 }
