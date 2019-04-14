@@ -11,13 +11,15 @@ namespace NuclearReactionModeling
         static void Main(string[] args)
         {
             DifferentShapes("cube.txt", "ball.txt");
+
+            Console.WriteLine("Done!");
         }
 
         static void DifferentShapes(string cubeFilename, string ballFilename)
         {
-            var beginPointsCount = 10;
+            var beginPointsCount = 1000;
             var lambda = 0.9;
-            var volume = 27.0;
+            var volume = 5000;
             var side = Math.Pow(volume, 1.0 / 3.0);
             var radius = side * Math.Pow(3.0 / (4.0 * Math.PI), 1.0 / 3.0);
 
@@ -29,7 +31,7 @@ namespace NuclearReactionModeling
             Task.WaitAll(writingTasks);
         }
 
-        static List<Particle> GenerateParticlesOnSurface(IShape shape, int count)
+        static List<Particle> GenerateInternalParticles(IShape shape, int count)
         {
             return Enumerable.Range(0, count)
                 .Select(_ => new Particle(shape.RandomInternalPoint(), Vector3.GetRandom()))
@@ -38,14 +40,14 @@ namespace NuclearReactionModeling
 
         static List<int> DoReaction(IShape shape, int particlesCount, double lambda)
         {
-            var particles = GenerateParticlesOnSurface(shape, particlesCount);
+            var particles = GenerateInternalParticles(shape, particlesCount);
             var reaction = new NuclearReaction(shape, particles, lambda);
             return reaction.Run();
         }
 
         static async Task WriteValuesInLinesAsync<TValue>(List<TValue> values, string filename)
         {
-            using (var writer = new StreamWriter(File.OpenWrite(filename)))
+            using (var writer = new StreamWriter(File.Open(filename, FileMode.Truncate)))
             {
                 foreach (var value in values)
                 {
