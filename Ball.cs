@@ -9,7 +9,7 @@ namespace NuclearReactionModeling
             this.Radius = radius;
         }
 
-        public bool IsInternalPoint(Vector3D point)
+        public bool IsInternalPoint(Vector3 point)
         {
             return point.Length <= this.Radius;
         }

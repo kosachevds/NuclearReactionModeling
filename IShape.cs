@@ -2,6 +2,6 @@ namespace NuclearReactionModeling
 {
     interface IShape
     {
-        bool IsInternalPoint(Vector3D point);
+        bool IsInternalPoint(Vector3 point);
     }
 }

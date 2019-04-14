@@ -50,7 +50,7 @@ namespace NuclearReactionModeling
         {
             return Enumerable
                 .Range(0, count)
-                .Select(_ => new Particle(Vector3D.GetRandom(particlesDurationToCenter), Vector3D.GetRandom()))
+                .Select(_ => new Particle(Vector3.GetRandom(particlesDurationToCenter), Vector3.GetRandom()))
                 .ToList();
         }
 

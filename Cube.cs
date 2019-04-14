@@ -12,7 +12,7 @@ namespace NuclearReactionModeling
             this.SideLength = sideLength;
         }
 
-        public bool IsInternalPoint(Vector3D point)
+        public bool IsInternalPoint(Vector3 point)
         {
             var sideLengthHalf = this.SideLength / 2;
             var coordinates = new[]{point.X, point.Y, point.Z};
