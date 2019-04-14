@@ -10,29 +10,29 @@ namespace NuclearReactionModeling
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            DifferentShapes("foo.txt");
         }
 
         static void DifferentShapes(string filename)
         {
-            var beginPointsCount = 5;
-            var lambda = 0.5;
-            var volume = 1.0;
+            var beginPointsCount = 10;
+            var lambda = 0.9;
+            var volume = 27.0;
             var side = Math.Pow(volume, 1.0 / 3.0);
             var radius = side * Math.Pow(3.0 / (4.0 * Math.PI), 1.0 / 3.0);
 
             var writingTasks = new Task[2];
             var ballCounts = DoReaction(new Ball(radius), beginPointsCount, lambda);
-            writingTasks[0] = WriteValuesInLinesAsync(ballCounts, "foo.txt");
+            writingTasks[0] = WriteValuesInLinesAsync(ballCounts, "ball.txt");
             var cubeCounts = DoReaction(new Cube(side), beginPointsCount, lambda);
-            writingTasks[1] = WriteValuesInLinesAsync(cubeCounts, "bar.txt");
+            writingTasks[1] = WriteValuesInLinesAsync(cubeCounts, "cube.txt");
             Task.WaitAll(writingTasks);
         }
 
         static List<Particle> GenerateParticlesOnSurface(IShape shape, int count)
         {
             return Enumerable.Range(0, count)
-                .Select(_ => new Particle(shape.RandomPointFromSurface(), Vector3.GetRandom()))
+                .Select(_ => new Particle(shape.RandomInternalPoint(), Vector3.GetRandom()))
                 .ToList();
         }
 

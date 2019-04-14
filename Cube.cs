@@ -24,10 +24,10 @@ namespace NuclearReactionModeling
             return point.Length <= sideLengthHalf;
         }
 
-        public Vector3 RandomPointFromSurface()
+        public Vector3 RandomInternalPoint()
         {
             var components = Enumerable.Range(0, 3)
-                .Select(_ => rnd.NextDouble() * this.SideLength + this.SideLength / 2)
+                .Select(_ => rnd.NextDouble() * this.SideLength - this.SideLength / 2)
                 .ToArray();
             return new Vector3(components[0], components[1], components[2]);
         }

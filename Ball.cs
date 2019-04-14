@@ -19,10 +19,10 @@ namespace NuclearReactionModeling
             return point.Length <= this.Radius;
         }
 
-        public Vector3 RandomPointFromSurface()
+        public Vector3 RandomInternalPoint()
         {
             var components = Enumerable.Range(0, 3)
-                .Select(_ => (rnd.NextDouble() * 2 - 1) * this.Radius)
+                .Select(_ => (rnd.NextDouble() * 2 - 1) * this.Radius / 2)
                 .ToArray();
             return new Vector3(components[0], components[1], components[2]);
         }
