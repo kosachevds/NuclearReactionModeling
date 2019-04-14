@@ -68,5 +68,15 @@ namespace NuclearReactionModeling
                 }
             }
         }
+
+        static IShape BallFromVolume(double volume)
+        {
+            return new Ball(Math.Pow((3 * volume) / (4 * Math.PI), 1.0 / 3.0));
+        }
+
+        static IShape CubeFromVolume(double volume)
+        {
+            return new Cube(Math.Pow(volume, 1.0 / 3.0));
+        }
     }
 }
