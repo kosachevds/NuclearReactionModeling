@@ -10,10 +10,10 @@ namespace NuclearReactionModeling
     {
         static void Main(string[] args)
         {
-            DifferentShapes("foo.txt");
+            DifferentShapes("cube.txt", "ball.txt");
         }
 
-        static void DifferentShapes(string filename)
+        static void DifferentShapes(string cubeFilename, string ballFilename)
         {
             var beginPointsCount = 10;
             var lambda = 0.9;
@@ -23,9 +23,9 @@ namespace NuclearReactionModeling
 
             var writingTasks = new Task[2];
             var ballCounts = DoReaction(new Ball(radius), beginPointsCount, lambda);
-            writingTasks[0] = WriteValuesInLinesAsync(ballCounts, "ball.txt");
+            writingTasks[0] = WriteValuesInLinesAsync(ballCounts, ballFilename);
             var cubeCounts = DoReaction(new Cube(side), beginPointsCount, lambda);
-            writingTasks[1] = WriteValuesInLinesAsync(cubeCounts, "cube.txt");
+            writingTasks[1] = WriteValuesInLinesAsync(cubeCounts, cubeFilename);
             Task.WaitAll(writingTasks);
         }
 
