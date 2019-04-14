@@ -5,6 +5,7 @@ namespace NuclearReactionModeling
 {
     class Cube : IShape
     {
+        private static Random rnd = new Random();
         private double SideLength { get; }
 
         public Cube(double sideLength)
@@ -21,6 +22,14 @@ namespace NuclearReactionModeling
                 return false;
             }
             return point.Length <= sideLengthHalf;
+        }
+
+        public Vector3 RandomPointFromSurface()
+        {
+            var components = Enumerable.Range(0, 3)
+                .Select(_ => rnd.NextDouble() * this.SideLength + this.SideLength / 2)
+                .ToArray();
+            return new Vector3(components[0], components[1], components[2]);
         }
     }
 }
