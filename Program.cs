@@ -21,6 +21,12 @@ namespace NuclearReactionModeling
             var side = Math.Pow(volume, 1.0 / 3.0);
             var radius = side * Math.Pow(3.0 / (4.0 * Math.PI), 1.0 / 3.0);
 
+            var writingTasks = new Task[2];
+            var ballCounts = DoReaction(new Ball(radius), beginPointsCount, lambda);
+            writingTasks[0] = WriteValuesInLinesAsync(ballCounts, "foo.txt");
+            var cubeCounts = DoReaction(new Cube(side), beginPointsCount, lambda);
+            writingTasks[1] = WriteValuesInLinesAsync(cubeCounts, "bar.txt");
+            Task.WaitAll(writingTasks);
         }
 
         static List<Particle> GenerateParticlesOnSurface(IShape shape, int count)
