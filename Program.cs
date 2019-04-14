@@ -31,6 +31,19 @@ namespace NuclearReactionModeling
             Task.WaitAll(writingTasks);
         }
 
+        static Dictionary<double, List<int>> AnalyzeVolumes(List<double> volumes, Func<double, IShape> shapeCreator)
+        {
+            var beginPointsCount = 1000;
+            var lambda = 0.9;
+
+            var result = new Dictionary<double, List<int>>(volumes.Count);
+            foreach (var volume in volumes)
+            {
+                result.Add(volume, DoReaction(shapeCreator(volume), beginPointsCount, lambda));
+            }
+            return result;
+        }
+
         static List<Particle> GenerateInternalParticles(IShape shape, int count)
         {
             return Enumerable.Range(0, count)
