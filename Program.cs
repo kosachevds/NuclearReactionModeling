@@ -18,8 +18,17 @@ namespace NuclearReactionModeling
         static void DifferentShapes(string cubeFilename, string ballFilename)
         {
             var volumes = Enumerable.Range(1, 5)
-                .Select(x => 1000.0 * x);
+                .Select(x => 1000.0 * x)
+                .ToList();
+            var writingTasks = new List<Task>(2);
 
+            var ballCounts = AnalyzeVolumes(volumes, BallFromVolume);
+            var ballCountsWriting = WriteCountsAsync(ballCounts, ballFilename);
+
+            var cubeCounts = AnalyzeVolumes(volumes, CubeFromVolume);
+            var cubeCountsWriting = WriteCountsAsync(cubeCounts, cubeFilename);
+
+            Task.WaitAll(ballCountsWriting, cubeCountsWriting);
         }
 
         static Dictionary<double, List<int>> AnalyzeVolumes(List<double> volumes, Func<double, IShape> shapeCreator)
