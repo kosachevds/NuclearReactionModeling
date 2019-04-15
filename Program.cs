@@ -17,18 +17,9 @@ namespace NuclearReactionModeling
 
         static void DifferentShapes(string cubeFilename, string ballFilename)
         {
-            var beginPointsCount = 1000;
-            var lambda = 0.9;
-            var volume = 5000;
-            var side = Math.Pow(volume, 1.0 / 3.0);
-            var radius = side * Math.Pow(3.0 / (4.0 * Math.PI), 1.0 / 3.0);
+            var volumes = Enumerable.Range(1, 5)
+                .Select(x => 1000.0 * x);
 
-            var writingTasks = new Task[2];
-            var ballCounts = DoReaction(new Ball(radius), beginPointsCount, lambda);
-            writingTasks[0] = WriteValuesInLinesAsync(ballCounts, ballFilename);
-            var cubeCounts = DoReaction(new Cube(side), beginPointsCount, lambda);
-            writingTasks[1] = WriteValuesInLinesAsync(cubeCounts, cubeFilename);
-            Task.WaitAll(writingTasks);
         }
 
         static Dictionary<double, List<int>> AnalyzeVolumes(List<double> volumes, Func<double, IShape> shapeCreator)
@@ -65,6 +56,16 @@ namespace NuclearReactionModeling
                 foreach (var value in values)
                 {
                     await writer.WriteAsync($"{value}\n");
+                }
+            }
+        }
+        static async Task WriteCountsAsync(Dictionary<double, List<int>> counts, string filename)
+        {
+            using (var writer = new StreamWriter(File.Open(filename, FileMode.Truncate)))
+            {
+                foreach (var pair in counts)
+                {
+                    await writer.WriteAsync(String.Join(' ', pair.Key, pair.Value.ToArray()));
                 }
             }
         }
