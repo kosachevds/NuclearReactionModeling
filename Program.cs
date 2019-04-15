@@ -15,11 +15,23 @@ namespace NuclearReactionModeling
             Console.WriteLine("Done!");
         }
 
+        static void BallWithInteractionProbabilities(double absorption, double scattering, double fission)
+        {
+            var ball = new Ball(10);
+            var particles = GenerateInternalParticles(ball, 1000);
+            var reaction = new NuclearReaction(ball, particles, 0.9);
+            reaction.RandomInteractions = new InteractionWithProbabilities(absorption, scattering, fission);
+            var counts = reaction.Run();
+               
+        }
+
         static void DifferentShapes(string cubeFilename, string ballFilename)
         {
             var volumes = Enumerable.Range(1, 5)
-                .Select(x => 1000.0 * x)
+                .Select(x => 100.0 * x)
                 .ToList();
+            volumes.AddRange(Enumerable.Range(1, 5)
+                .Select(x => 1000.0 * x));
             var writingTasks = new List<Task>(2);
 
             var ballCounts = AnalyzeVolumes(volumes, BallFromVolume);
@@ -74,7 +86,9 @@ namespace NuclearReactionModeling
             {
                 foreach (var pair in counts)
                 {
-                    await writer.WriteAsync(String.Join(' ', pair.Key, pair.Value.ToArray()));
+                    await writer.WriteAsync(pair.Key + " ");
+                    await writer.WriteAsync(String.Join(' ', pair.Value));
+                    await writer.WriteLineAsync();
                 }
             }
         }
