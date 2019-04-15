@@ -15,7 +15,7 @@ namespace NuclearReactionModeling
 
         public int MaxStepCount { get; set; }
         private int FissionParticlesCount { get; set; }
-        private InteractionGenerator RandomInteractions { get; set; }
+        public InteractionGenerator RandomInteractions { get; set; }
 
         public NuclearReaction(IShape body, List<Particle> particles, double lambda)
         {
